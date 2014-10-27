@@ -36,22 +36,22 @@ Parameters:
 double MovingAverage::computeAverage(int start, int width)
 {
 double value;
-double sum = 0.0;
+auto sum = 0.0;
 double average;
    
-  for(int i = start; i < (start + width) ; i++ )
+  for(auto i = start; i < (start + width) ; ++i )
   {
    value = theData[i];
-   string val =  Utils::Format(value,8,3);
-   cout << val;
+   std::string val =  Utils::Format(value,8,3);
+   std::cout << val;
    sum += value;
   }
-    cout << " :";
-    string tempA = Utils::Format(sum,7,3);
-    cout << tempA << " :";
+    std::cout << " :";
+    std::string tempA = Utils::Format(sum,7,3);
+    std::cout << tempA << " :";
     average = sum / width;
-    string tempB = Utils::Format(average,8,3);
-    cout << tempB;
+    std::string tempB = Utils::Format(average,8,3);
+    std::cout << tempB;
    
   return( average );
 }
@@ -79,41 +79,41 @@ Output: Formatted integers using the class Utils and if that set of days
 ****/
 void MovingAverage::doMovingAverage(int width, double tolerance)
 {
-cout << "Entering doMovingAverage" << endl;
+std::cout << "Entering doMovingAverage" << std::endl;
 double average;
-int valueStart = 0;
+auto valueStart = 0;
 double  decisionMetric = 0.0;
 string tol = Utils::Format(decisionMetric,8,3);
-cout << " Computing the width and tolerance " << width << " " << tolerance
-     << endl;
+std::cout << " Computing the width and tolerance " << width << " " << tolerance
+     << std::endl;
   
- for(unsigned i = 0; i < theData.size() -width; i++)
+ for(auto i = 0; i < theData.size() -width; ++i)
  {
     average = computeAverage(i,width);
     std::cout << Utils::Format(average,8,3);
     decisionMetric = theData[i + width - 1]/average;
-    string DM = Utils::Format(decisionMetric,8,3);
-    cout << DM;
+    std::string DM = Utils::Format(decisionMetric,8,3);
+    std::cout << DM;
    
     if(  decisionMetric > (1 + tolerance))
     {
-       cout << " sell" << endl;
-       valueStart++;
+       std::cout << " sell" << std::endl;
+       ++valueStart;
     }
       else 
       {
          if(  decisionMetric < (1 - tolerance) )
          {
-           cout << " buy " << endl;
+           std::cout << " buy " << std::endl;
            valueStart++;
          }
          else
          {
-           cout << "\n";
+           std::cout << "\n";
          }
       }        
   }             
-cout << "leaving doMovingAverage" << endl;        
+std::cout << "leaving doMovingAverage" << std::endl;        
         
 }
 
@@ -126,12 +126,12 @@ We now have a vector that consist of 100 values of stock and it now received.
 
 
 ****/
-void MovingAverage::readData(string fileName)
+void MovingAverage::readData(std::string fileName)
 {
 Scanner inScanner;
 double value ;
 inScanner.openFile(fileName);
-cout << "Now receiving Stocks" << endl;
+std::cout << "Now receiving Stocks" << std::endl;
 
   while(inScanner.hasNext())
   {
@@ -142,8 +142,8 @@ cout << "Now receiving Stocks" << endl;
  
 }
 
-string MovingAverage::toStringTheData()
+std::string MovingAverage::toStringTheData()
 {
-  string blah = " ";
+  std::string blah = " ";
   return blah;
 }
